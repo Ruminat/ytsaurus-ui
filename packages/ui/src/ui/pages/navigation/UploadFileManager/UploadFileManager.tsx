@@ -1,7 +1,7 @@
 import * as React from 'react';
 import cn from 'bem-cn-lite';
 
-import {Button} from '@gravity-ui/uikit';
+import Button from '../../../components/Button/Button';
 
 import Link from '../../../containers/Link/Link';
 import Modal from '../../../components/Modal/Modal';
@@ -83,6 +83,7 @@ export const UploadFileManager: React.FC<UploadFileManagerProps> = (props) => {
 
         return (
             <Button
+                actionRole="modal"
                 view="action"
                 className={className}
                 disabled={isUploadButtonDisabled}

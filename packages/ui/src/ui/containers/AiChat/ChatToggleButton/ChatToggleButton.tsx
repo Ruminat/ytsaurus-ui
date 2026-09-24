@@ -1,5 +1,6 @@
 import React, {type FC} from 'react';
-import {Button, Icon, Tooltip} from '@gravity-ui/uikit';
+import {Icon, Tooltip} from '@gravity-ui/uikit';
+import Button from '../../../components/Button/Button';
 import AiIcon from '../../../assets/img/svg/icons/ai-chat-icon.svg';
 import i18n from './i18n';
 import {useChatToggle} from './useChatToggle';

@@ -58,6 +58,7 @@ import {AclColumnsControl} from '../../containers/ACL/RequestPermissions/AclColu
 import {useHotkeysScope} from '../../hooks/use-hotkeysjs-scope';
 import {PoolsMultiple} from './controls/PoolsMultiple/PoolsMultiple';
 import {ServicesSelect} from './controls/ServicesSelect/ServicesSelect';
+import {useThemeProps} from '../../components/ThemePropsConfigProvider';
 
 const block = cn('yt-dialog');
 
@@ -229,7 +230,26 @@ export function YTDialog<Values, InitialValues = Partial<Values>>(
     > & {hotkeyScope?: string; asLeftTopBlock?: boolean},
 ) {
     const {modal, asLeftTopBlock, headerProps, hotkeyScope = 'yt-dialog'} = props;
-    const dialog = <DFDialog {...(props as any)} modal={asLeftTopBlock ? false : modal} />;
+    const applyButtonThemeProps = useThemeProps('button', {actionRole: 'modal'});
+    const applyButtonProps = props.footerProps?.propsButtonApply;
+    const applyButtonClassName = [applyButtonThemeProps.className, applyButtonProps?.className]
+        .filter(Boolean)
+        .join(' ');
+    const footerProps = {
+        ...props.footerProps,
+        propsButtonApply: {
+            ...applyButtonProps,
+            ...applyButtonThemeProps,
+            className: applyButtonClassName || undefined,
+        },
+    };
+    const dialog = (
+        <DFDialog
+            {...(props as any)}
+            modal={asLeftTopBlock ? false : modal}
+            footerProps={footerProps}
+        />
+    );
 
     // We don't want to trigger any page hotkeys when dialog is visible,
     // therefore we switing to dialog hotkeys scope.
