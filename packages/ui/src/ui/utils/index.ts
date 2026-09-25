@@ -71,8 +71,11 @@ export function prepareAttributes(attributes: any, settings?: UnipikaSettings): 
                 return getPreparedValue(attribute, value);
             }
 
-            default:
+            default: {
                 prepareAttributes(attribute.$value, unipika.formatFromYSON(attribute, settings));
+
+                return undefined;
+            }
         }
     };
 
